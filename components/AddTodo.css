@@ -1,0 +1,14 @@
+.input{
+	width: 250px;
+	height: 35px;
+	box-sizing: border-box;
+}
+.add{
+	width: 50px;
+    height: 35px;
+    display: inline-block;
+    line-height: 35px;
+    text-align: center;
+    box-sizing: border-box;
+    color: #00d8ff;
+}

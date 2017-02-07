@@ -1,0 +1,11 @@
+.show_wrapper{
+	display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 35px;
+}
+.show_item{
+	cursor:pointer;
+	font-size: 18px;
+	color: #00d8ff;
+}

@@ -1,0 +1,43 @@
+.login-center{
+	width: 300px;
+    margin: 100px auto;
+    text-align: center;
+}
+.login-input{
+	width: 250px;
+	height: 35px;
+	box-sizing: border-box;
+}
+.login-text{
+	display: inline-block;
+	width: 50px;
+	color: #00d8ff;
+	font-weight: bold;
+}
+.login-block{
+	margin: 10px 0;
+}
+.login-img{
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	display: inline-block;
+}
+.login-submit{
+	width: 80px;
+	font-size: 20px;
+	box-shadow: 0 0 3px 3px #ccc;
+	display: inline-block;
+	line-height: 40px;
+	cursor: pointer;
+	transition: all 0.5s;
+}
+.login-submit:hover{
+	width: 80px;
+	font-size: 20px;
+	box-shadow: none;
+	border:1px solid #ccc;
+	display: inline-block;
+	line-height: 40px;
+	cursor: pointer;
+}
