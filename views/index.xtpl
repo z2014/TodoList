@@ -1,0 +1,10 @@
+{{extend ("./layout")}}
+
+{{#block ("head")}}
+    <meta name="viewport" content="width=device,initial-scale=1">
+{{/block}}
+
+{{#block ("body")}}
+    <div id="root"></div>
+    <script src="/js/index.js"></script>
+{{/block}}
