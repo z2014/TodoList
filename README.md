@@ -1,15 +1,16 @@
 # TodoList
-A simple application with React,Redux,React-router
 
 
-## How to install
+## version 2.0(add koa)
+## version 1.0(React,Redux,React-router)
+### How to install
 ```shell
 $ git clone https://github.com/z2014/TodoList.git
 $ cd TodoList
 $ npm install
 ```
 
-## How to run
+### How to run
 ```
 npm start
 ```
