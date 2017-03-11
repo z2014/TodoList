@@ -24713,6 +24713,8 @@
 					return response.json();
 				}).then(function (data) {
 					if (data.success) {
+						console.log('cookie');
+						document.cookie = 'todo-online=' + data.data.token + ';expires=' + data.data.expires + ';domain=' + data.data.domain;
 						window.location.href = '/index';
 					} else {
 						console.log("没有用户");

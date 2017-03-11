@@ -37,7 +37,7 @@ app.use(function *(next) {
 	} catch (err) {
 		if (401 == err.status) {
 			this.status = 401;
-			console.log('sasasasa');
+			console.log('redirect');
 			this.redirect('/login');
 		} else {
 			if (debug) {
@@ -53,7 +53,7 @@ app.use(function *(next) {
 });
 
 app.use(require('koa-static')(__dirname + '/public'));
-// app.use(jwt({cookie: config.authCookie, secret: config.secret,key: 'jwtdata'}).unless({path: [/^\/login/,/^\/api\/login/] }));
+app.use(jwt({cookie: config.authCookie, secret: config.secret,key: 'jwtdata'}).unless({path: [/^\/login/,/^\/api\/login/] }));
 console.log('start');
 router.use('/index', index.routes());
 router.use('/login', login.routes());

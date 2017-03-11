@@ -1,6 +1,7 @@
 import React,{ Component,PropsType } from 'react';
 import './Login.css';
 import { browserHistory } from 'react-router';
+import 'whatwg-fetch';
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -9,23 +10,32 @@ export default class Login extends Component {
 	submit() {
 		const user = this.refs.user.value;
 		const pass = this.refs.pass.value;
-		// const req = new Request('http://localhost:8000/login',
-		// 	{method:'POST',body:'{"user":"user","pass":"pass"}'});
-		// fetch(req)
-		//     .then(function(response){
-  //               return response.json()
-		//     }).then(function(data){
-		//     	console.log(data);
-		//     }).catch(function(err){
-		//     	console.log(err);
-		//     });
-		if (user == 'zcl' && pass == '123') {
-			const path = 'http://localhost:8080/todo';
-            browserHistory.push(path);
-		}else{
-			alert('请输入默认姓名与密码')
-		}
-        
+		fetch('/api/login',{
+            method: 'POST',
+            headers: {
+		      'Content-Type': 'application/json'
+		    },
+		    credentials: 'include',
+		    mode: 'cors',
+		    body:JSON.stringify({
+		    	user:user,
+		    	pwd:pass
+		    })
+		}).then(function(response){
+                return response.json()
+	    }).then(function(data){
+	    	if (data.success) {
+	    	  console.log('cookie');
+	    	  document.cookie = 'todo-online=' + data.data.token + 
+	    	    ';expires=' + data.data.expires + 
+	    	    ';domain=' + data.data.domain;
+	    	  window.location.href = '/index';
+	    	}else {
+	    	  console.log("没有用户");
+	    	}
+	    }).catch(function(err){
+	    	console.log(err);
+	    });
         console.log(1);
 	}
 	render() {

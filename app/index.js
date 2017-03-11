@@ -13,17 +13,9 @@ const initialState = {
 };
 var roots = document.getElementById('root');
 const store = configureStore(initialState);
-const Root = () => {
-	return (
-		<Router history={browserHistory}>
-		    <Route path="/" component={Login} />
-		    <Route path="/todo" component={App} />
-		</Router>
-	)
-};
 ReactDOM.render(
 	<Provider store={store}>
-	    <Root/>
+	    <Login/>
 	</Provider>,
     roots
 );

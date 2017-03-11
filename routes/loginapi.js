@@ -17,7 +17,6 @@ router.post('/',function *(next) {
   	  pwd: pwd
   	}
   });
-  // console.log('data',data);
   if (data) {
     const token = jwt.sign({
       user:username,
