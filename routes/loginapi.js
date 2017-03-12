@@ -4,32 +4,38 @@ var router = require('koa-router')(),
     qs = require('qs'),
     jwt = require('koa-jwt');
 
-router.post('/',function *(next) {
+router.post('/',function *() {
   const param = qs.parse(this.request.body);
   console.log(param);
   const username = param.user;
   const pwd = param.pwd;
   var _errInfo = '请输入正确密码';
   var _data;
-  var data = yield User.findAll({
+  var data = yield User.findOne({
   	where: {
-  	  name:username,
-  	  pwd: pwd
-  	}
+  	  name:username
+  	},
+    attributes: ['pwd']
   });
+  console.log(data);
   if (data) {
-    const token = jwt.sign({
-      user:username,
-      pwd:pwd
-    },config.secret, {expiresIn: '3h'});
+    if (data.pwd === pwd) {
+      const token = jwt.sign({
+        user:username,
+        pwd:pwd
+      },config.secret, {expiresIn: '3h'});
 
-    _data = {
-      token: token,
-      expires: 3,
-      domain: config.host
-    };
-
-    _errInfo = false;
+      _data = {
+        token: token,
+        expires: 3,
+        domain: config.host
+      };
+      _errInfo = false;
+    } else {
+      _errInfo = '密码错误';
+    }   
+  }else {
+    _errInfo = '用户不存在';
   }
   
   this.body = {

@@ -8,7 +8,7 @@ export default class AddTodo extends Component {
 	click(){
 		let input = this.refs.input;
 		let value = input.value;
-		if (value == '') { value = '这是默认的任务'}
+		if (value == '') value = '这是默认的任务';
 	    this.props.AddTodo(value);
 	    input.value = '';
 	}

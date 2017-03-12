@@ -2,11 +2,7 @@ export default function todo(state = [],action) {
 	switch(action.type) {
 		case 'addTodo':
 		    return [
-		        {
-		        	id:state.length + 1,
-		        	text: action.text,
-		        	completed:false
-		        },
+		        action.data,
 		        ...state
 		    ]
 		case 'toggleTodo':

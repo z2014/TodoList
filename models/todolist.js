@@ -7,7 +7,8 @@ var Todolist = db.define('todolist',{
   	unique:true
   },
   completed:Sequelize.INTEGER,
-  text:Sequelize.STRING(20)
+  text:Sequelize.STRING(20),
+  userid:Sequelize.INTEGER
 },{
   timestamps:false,
   freezeTableName:true

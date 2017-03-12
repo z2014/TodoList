@@ -4,7 +4,7 @@ module.exports = {
         './index.js',
     ],
     output: {
-        filename: 'bundle.js',
+        filename: 'todo.js',
         publicPath: ''
     },
     devServer: {
