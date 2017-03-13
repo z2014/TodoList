@@ -15,14 +15,16 @@ router.post('/',function *() {
   	where: {
   	  name:username
   	},
-    attributes: ['pwd']
+    attributes: ['id','pwd','followers','following']
   });
-  console.log(data);
   if (data) {
     if (data.pwd === pwd) {
       const token = jwt.sign({
+        id:data.dataValues.id,
         user:username,
-        pwd:pwd
+        pwd:pwd,
+        followers:data.dataValues.followers,
+        following:data.dataValues.following
       },config.secret, {expiresIn: '3h'});
 
       _data = {

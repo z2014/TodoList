@@ -1,0 +1,7 @@
+.avatarSpan {
+	color: #00d8ff;
+}
+.userInfor {
+	display: flex;
+	justify-content:space-between;
+}

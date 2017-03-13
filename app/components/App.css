@@ -1,5 +1,5 @@
 .center{
-	width: 300px;
+	width: 500px;
 	margin: 100px auto;
 }
 .headline{
@@ -7,4 +7,16 @@
 	color: #00d8ff;
 	text-align: center;
 	font-size: 35px;
+}
+.child:first-child{
+	width: 40%;
+	height: 20px;
+	display: inline-block;
+	vertical-align: top;
+	box-sizing: border-box;
+}
+.child:last-child{
+	width: 60%;
+	display: inline-block;
+	box-sizing: border-box;
 }

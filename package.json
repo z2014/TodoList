@@ -24,6 +24,7 @@
     "qs": "^6.3.1",
     "randomstring": "^1.1.5",
     "sequelize": "^3.30.0",
+    "socket.io": "^1.7.3",
     "validator": "^6.2.1",
     "xtemplate": "^4.6.0",
     "xtpl": "^3.3.0"

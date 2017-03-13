@@ -1,5 +1,6 @@
 var router = require('koa-router')(),
     Todolist = require('../models/todolist.js'),
+    User = require('../models/user.js'),
     qs = require('qs');
 router.get('/',function *() {
   const currentUser = this.state.jwtdata;
@@ -9,10 +10,24 @@ router.get('/',function *() {
     },
     order: [['id','DESC']]
   });
-
+  const _otherUser = yield User.findAll({
+    where:{
+      name:{
+        ne:currentUser.user
+      }
+    },
+    attributes:['id','name']
+  });
+  const backUser = _otherUser.map(function(item){
+    const param = item.dataValues;
+    param.follow = 0;
+    return param;
+  });
   const initialState = {
   	filter: 'show-all',
-  	todo: _data
+  	todo: _data,
+    user:currentUser,
+    otherUser:backUser
   };
   this.body = {
   	data:initialState
