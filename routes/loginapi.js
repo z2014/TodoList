@@ -6,7 +6,7 @@ var router = require('koa-router')(),
 
 router.post('/',function *() {
   const param = qs.parse(this.request.body);
-  console.log(param);
+  console.log('loginapi',param);
   const username = param.user;
   const pwd = param.pwd;
   var _errInfo = '请输入正确密码';
@@ -22,7 +22,6 @@ router.post('/',function *() {
       const token = jwt.sign({
         id:data.dataValues.id,
         user:username,
-        pwd:pwd,
         followers:data.dataValues.followers,
         following:data.dataValues.following
       },config.secret, {expiresIn: '3h'});

@@ -69,15 +69,7 @@ app.use(router.routes()).use(router.allowedMethods());
 // 	logger.error('server error',err,ctx);
 // });
 
-var server = require('http').createServer(app.callback());
-var io = require('socket.io')(server);
-io.on('connection',function(socket) {
-	console.log('connection');
-	socket.on('login',function(obj) {
-		socket.name = obj.id;
-		io.emit('login',{user:'zcl'});
-		console.log('zcl login in');
-	});
-});
+// var server = require('http').createServer(app.callback());
+
 
 module.exports = app;

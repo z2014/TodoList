@@ -36,9 +36,11 @@ router.get('/',function *() {
 
 router.post('/',function *() {
   const param = qs.parse(this.request.body);
+  const currentUser = this.state.jwtdata;
   const _data = yield Todolist.create({
     text:param.text,
-    completed:0
+    completed:0,
+    userid:currentUser.id
   });
   if (_data) {
     this.body = {

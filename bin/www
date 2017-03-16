@@ -20,6 +20,17 @@ var port = normalizePort(process.env.PORT || '3000');
  */
 
 var server = http.createServer(app.callback());
+var io = require('socket.io')(server);
+io.on('connection',function(socket) {
+  socket.on('follow',function(data) {
+    console.log('client',data);
+    if (data.isFollowing) {
+      io.sockets.emit('reduceFans',data.id);
+    } else { 
+      io.sockets.emit('addFans',data.id);
+    }
+  });
+});
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -57,6 +57,7 @@ export function filterList(filter) {
 }
 
 export function follow(id,isFollowing) {
+	socket.emit('follow',{id:id,isFollowing,isFollowing});
 	return function(dispatch) {
 		fetch('/api/follow',{
 			method:'POST',
@@ -75,10 +76,10 @@ export function follow(id,isFollowing) {
 			if (data.success) {
 				if (isFollowing) {
 					dispatch({type:'reduce',id:id});
-					dispatch({type:'userReduce',id});
+					dispatch({type:'userReduceFollowing',id});
 				} else {
 					dispatch({type:'add',id:id});
-					dispatch({type:'userAdd',id});
+					dispatch({type:'userAddFollowing',id});
 				}
 			} else {
 				alert('关注操作异常');
@@ -87,4 +88,12 @@ export function follow(id,isFollowing) {
 			console.log('关注',err);
 		})
 	}
+}
+
+export function userManage(isIncrease) {
+    if (isIncrease) {
+    	return {type:'addFans'};
+    } else {
+    	return {type:'reduceFans'};
+    }
 }

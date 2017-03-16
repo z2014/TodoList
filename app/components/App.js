@@ -29,7 +29,6 @@ class App extends Component {
 	}
     render() { 
     	const data = this.props.list;
-    	//mock
     	const data1 = this.props.otherUser;
     	const user = this.props.user;
     	return (

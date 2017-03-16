@@ -6,5 +6,11 @@
 
 {{#block ("body")}}
     <div id="root"></div>
+    <script type="text/javascript">
+        var socket = io('http://localhost:3000');
+        var globalUser = {
+            id:{{currentUser.id}}
+        };
+    </script>
     <script src="/js/todo.js"></script>
 {{/block}}

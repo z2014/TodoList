@@ -3,6 +3,7 @@
 <head>
     <meta name="charset" content="utf-8" />
     <title>{{title}}</title>
+    <script src="/js/socket.io.min.js"></script>
     {{{block ("head")}}}
 </head>
 <body>

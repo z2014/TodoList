@@ -9,6 +9,23 @@ export default class Avator extends Component {
 			following:this.props.data.following ? this.props.data.following : 0
 		}
 	}
+	componentDidMount() {
+		var self = this;
+		socket.on('addFans',function(data) {
+	        if (data === globalUser.id) {
+	            self.setState({
+	            	followers:++self.state.followers
+	            });
+	        }
+	    });
+	    socket.on('reduceFans',function(data) {
+	        if (data === globalUser.id) {
+	            self.setState({
+	            	followers:--self.state.followers
+	            });
+	        }
+	    });
+	}
 	componentWillReceiveProps(nextProps) {
 		this.setState(nextProps.data);
 	}

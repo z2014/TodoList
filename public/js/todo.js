@@ -82,25 +82,25 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	fetch('/api/todo', {
-	  method: 'GET',
-	  headers: {
-	    'Content-Type': 'application/json'
-	  },
-	  credentials: 'include',
-	  mode: 'cors'
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		credentials: 'include',
+		mode: 'cors'
 	}).then(function (response) {
-	  return response.json();
+		return response.json();
 	}).then(function (data) {
-	  var initialState = data.data;
-	  var roots = document.getElementById('root');
-	  var store = (0, _configureStore2.default)(initialState);
-	  _reactDom2.default.render(_react2.default.createElement(
-	    _reactRedux.Provider,
-	    { store: store },
-	    _react2.default.createElement(_App2.default, null)
-	  ), roots);
+		var initialState = data.data;
+		var roots = document.getElementById('root');
+		var store = (0, _configureStore2.default)(initialState);
+		_reactDom2.default.render(_react2.default.createElement(
+			_reactRedux.Provider,
+			{ store: store },
+			_react2.default.createElement(_App2.default, null)
+		), roots);
 	}).catch(function (err) {
-	  console.log('todo', err);
+		console.log('todo', err);
 	});
 	// const initialState = { 
 	//     filter:'show-all',
@@ -120,17 +120,6 @@
 	//  </Provider>,
 	//     roots
 	// );
-	// var ws = new WebSocket('ws://localhost:8080');
-	// ws.open = function() {
-	// 	console.log('websocket open');
-	// 	ws.send('hello');
-	// };
-	// ws.onmessage = function(evt) {
-	//     console.log('receive',evt.data);
-	// };
-	// ws.onerror = function(evt) {
-	// 	console.log('websocket err');
-	// }
 
 /***/ },
 /* 2 */
@@ -21573,7 +21562,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21617,112 +21606,110 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var App = function (_Component) {
-	  _inherits(App, _Component);
+		_inherits(App, _Component);
 
-	  function App(props) {
-	    _classCallCheck(this, App);
+		function App(props) {
+			_classCallCheck(this, App);
 
-	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-	    _this.addTodo = _this.addTodo.bind(_this);
-	    _this.toggleTodo = _this.toggleTodo.bind(_this);
-	    _this.filter = _this.filter.bind(_this);
-	    _this.follow = _this.follow.bind(_this);
-	    return _this;
-	  }
+			_this.addTodo = _this.addTodo.bind(_this);
+			_this.toggleTodo = _this.toggleTodo.bind(_this);
+			_this.filter = _this.filter.bind(_this);
+			_this.follow = _this.follow.bind(_this);
+			return _this;
+		}
 
-	  _createClass(App, [{
-	    key: 'addTodo',
-	    value: function addTodo(text) {
-	      this.props.addTodo(text);
-	    }
-	  }, {
-	    key: 'toggleTodo',
-	    value: function toggleTodo(id) {
-	      this.props.toggleTodo(id);
-	    }
-	  }, {
-	    key: 'filter',
-	    value: function filter(name) {
-	      this.props.filterList(name);
-	    }
-	  }, {
-	    key: 'follow',
-	    value: function follow(name, isFollowing) {
-	      this.props.follow(name, isFollowing);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var data = this.props.list;
-	      //mock
-	      var data1 = this.props.otherUser;
-	      var user = this.props.user;
-	      console.log('user', user);
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'center' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'child' },
-	          _react2.default.createElement(_RecommendBlock2.default, { data: data1, follow: this.follow })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'child' },
-	          _react2.default.createElement(_Avatar2.default, { data: user }),
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'headline' },
-	            'TODOLIST'
-	          ),
-	          _react2.default.createElement(_AddTodo2.default, { AddTodo: this.addTodo }),
-	          _react2.default.createElement(_ShowList2.default, { filter: this.filter }),
-	          _react2.default.createElement(_TodoList2.default, { data: data, toggleTodo: this.toggleTodo })
-	        )
-	      );
-	    }
-	  }]);
+		_createClass(App, [{
+			key: 'addTodo',
+			value: function addTodo(text) {
+				this.props.addTodo(text);
+			}
+		}, {
+			key: 'toggleTodo',
+			value: function toggleTodo(id) {
+				this.props.toggleTodo(id);
+			}
+		}, {
+			key: 'filter',
+			value: function filter(name) {
+				this.props.filterList(name);
+			}
+		}, {
+			key: 'follow',
+			value: function follow(name, isFollowing) {
+				this.props.follow(name, isFollowing);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var data = this.props.list;
+				var data1 = this.props.otherUser;
+				var user = this.props.user;
+				return _react2.default.createElement(
+					'div',
+					{ className: 'center' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'child' },
+						_react2.default.createElement(_RecommendBlock2.default, { data: data1, follow: this.follow })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'child' },
+						_react2.default.createElement(_Avatar2.default, { data: user }),
+						_react2.default.createElement(
+							'p',
+							{ className: 'headline' },
+							'TODOLIST'
+						),
+						_react2.default.createElement(_AddTodo2.default, { AddTodo: this.addTodo }),
+						_react2.default.createElement(_ShowList2.default, { filter: this.filter }),
+						_react2.default.createElement(_TodoList2.default, { data: data, toggleTodo: this.toggleTodo })
+					)
+				);
+			}
+		}]);
 
-	  return App;
+		return App;
 	}(_react.Component);
 
 	function setVisible(todo, filter) {
-	  switch (filter) {
-	    case 'show-todo':
-	      return todo.filter(function (item) {
-	        return !item.completed;
-	      });
-	    case 'show-done':
-	      return todo.filter(function (item) {
-	        return item.completed;
-	      });
-	    case 'show-all':
-	      return todo;
-	  }
+		switch (filter) {
+			case 'show-todo':
+				return todo.filter(function (item) {
+					return !item.completed;
+				});
+			case 'show-done':
+				return todo.filter(function (item) {
+					return item.completed;
+				});
+			case 'show-all':
+				return todo;
+		}
 	}
 	function mapStateToProps(state) {
-	  return {
-	    list: setVisible(state.todo, state.filter),
-	    user: state.user,
-	    otherUser: state.otherUser
-	  };
+		return {
+			list: setVisible(state.todo, state.filter),
+			user: state.user,
+			otherUser: state.otherUser
+		};
 	}
 	function mapDispatchToProps(dispatch) {
-	  return {
-	    addTodo: function addTodo(text) {
-	      return dispatch((0, _index.addTodo)(text));
-	    },
-	    toggleTodo: function toggleTodo(id) {
-	      return dispatch((0, _index.toggleTodo)(id));
-	    },
-	    filterList: function filterList(name) {
-	      return dispatch((0, _index.filterList)(name));
-	    },
-	    follow: function follow(name, isFollowing) {
-	      return dispatch((0, _index.follow)(name, isFollowing));
-	    }
-	  };
+		return {
+			addTodo: function addTodo(text) {
+				return dispatch((0, _index.addTodo)(text));
+			},
+			toggleTodo: function toggleTodo(id) {
+				return dispatch((0, _index.toggleTodo)(id));
+			},
+			filterList: function filterList(name) {
+				return dispatch((0, _index.filterList)(name));
+			},
+			follow: function follow(name, isFollowing) {
+				return dispatch((0, _index.follow)(name, isFollowing));
+			}
+		};
 	}
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
@@ -22475,6 +22462,25 @@
 		}
 
 		_createClass(Avator, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var self = this;
+				socket.on('addFans', function (data) {
+					if (data === globalUser.id) {
+						self.setState({
+							followers: ++self.state.followers
+						});
+					}
+				});
+				socket.on('reduceFans', function (data) {
+					if (data === globalUser.id) {
+						self.setState({
+							followers: --self.state.followers
+						});
+					}
+				});
+			}
+		}, {
 			key: 'componentWillReceiveProps',
 			value: function componentWillReceiveProps(nextProps) {
 				this.setState(nextProps.data);
@@ -24975,8 +24981,11 @@
 	exports.toggleTodo = toggleTodo;
 	exports.filterList = filterList;
 	exports.follow = follow;
+	exports.userManage = userManage;
 
 	__webpack_require__(239);
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function addTodo(text) {
 		return function (dispatch) {
@@ -25035,6 +25044,7 @@
 	}
 
 	function follow(id, isFollowing) {
+		socket.emit('follow', _defineProperty({ id: id, isFollowing: isFollowing }, 'isFollowing', isFollowing));
 		return function (dispatch) {
 			fetch('/api/follow', {
 				method: 'POST',
@@ -25053,10 +25063,10 @@
 				if (data.success) {
 					if (isFollowing) {
 						dispatch({ type: 'reduce', id: id });
-						dispatch({ type: 'userReduce', id: id });
+						dispatch({ type: 'userReduceFollowing', id: id });
 					} else {
 						dispatch({ type: 'add', id: id });
-						dispatch({ type: 'userAdd', id: id });
+						dispatch({ type: 'userAddFollowing', id: id });
 					}
 				} else {
 					alert('关注操作异常');
@@ -25065,6 +25075,14 @@
 				console.log('关注', err);
 			});
 		};
+	}
+
+	function userManage(isIncrease) {
+		if (isIncrease) {
+			return { type: 'addFans' };
+		} else {
+			return { type: 'reduceFans' };
+		}
 	}
 
 /***/ },
@@ -31372,10 +31390,10 @@
 		var action = arguments[1];
 
 		switch (action.type) {
-			case 'userAdd':
+			case 'userAddFollowing':
 				var cur = { following: ++state.following };
 				return _extends({}, state, cur);
-			case 'userReduce':
+			case 'userReduceFollowing':
 				var cur = { following: --state.following };
 				return _extends({}, state, cur);
 			default:
