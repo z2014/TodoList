@@ -1,19 +1,37 @@
 var router = require('koa-router')(),
     Todolist = require('../models/todolist.js'),
     User = require('../models/user.js'),
+    Follow = require('../models/follow.js'),
     qs = require('qs');
 router.get('/',function *() {
-  const currentUser = this.state.jwtdata;
+  const userid = this.state.jwtdata.id;
+  const currentUser = yield User.findOne({
+    where:{
+      'id':userid
+    },
+    attributes:['id','followers','following']
+  });
   const _data = yield Todolist.findAll({
     where: {
-      'userid':currentUser.user
+      'userid':userid
     },
     order: [['id','DESC']]
   });
+  const userData = yield Follow.findAll({
+    where:{
+      followers:userid
+    },
+    attributes:['following']
+  });
+  var shiftArr = [];
+  for (var i = 0; i < userData.length; i++) {
+    shiftArr.push(userData[i].dataValues.following);
+  }
+  shiftArr.push(userid);
   const _otherUser = yield User.findAll({
     where:{
-      name:{
-        ne:currentUser.user
+      id:{
+        not:shiftArr
       }
     },
     attributes:['id','name']

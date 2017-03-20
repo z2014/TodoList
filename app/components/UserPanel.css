@@ -1,0 +1,15 @@
+.userPanel{
+	position: absolute;
+	left: -180px;
+	top: -40px;
+	border:1px solid black;
+	text-align: center;
+	width: 200px;
+}
+.panelItem{
+	list-style-type: none;
+}
+li,p,ul{
+	margin: 0px;
+	padding: 0px;
+}

@@ -21,6 +21,7 @@
     line-height: 30px;
     text-align: center;
     margin: 10px 0;
+    position: relative;
 }
 .followhead{
 	color: #00d8ff;

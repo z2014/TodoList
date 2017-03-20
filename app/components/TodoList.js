@@ -11,7 +11,8 @@ export default class TodoList extends Component {
 			<ul style={style}>
     	        {
     	        	data.map((todo,index) => {
-                        return <Todo toggleTodo={this.props.toggleTodo} item={todo} key={todo.id}/>
+                        return <Todo toggleTodo={this.props.toggleTodo} item={todo} key={todo.id} 
+                        index={data.length-index}/>
     	            })
     	        }
     	    </ul>

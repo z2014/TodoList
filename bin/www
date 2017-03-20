@@ -30,7 +30,12 @@ io.on('connection',function(socket) {
       io.sockets.emit('addFans',data.id);
     }
   });
+  socket.on('speak',function(data) {
+    console.log('speak',data);
+    io.sockets.emit('receive',data);
+  });
 });
+
 
 /**
  * Listen on provided port, on all network interfaces.

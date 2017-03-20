@@ -1,7 +1,45 @@
 .avatarSpan {
 	color: #00d8ff;
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	width: 33.3%;
+	line-height: 40px;
+	text-align: center;
 }
 .userInfor {
 	display: flex;
 	justify-content:space-between;
+	height: 40px;
+}
+.avatarSpan a{
+    color: #00d8ff;
+    text-decoration: none;
+}
+.avatarSpan a:hover{
+	text-decoration: underline;
+}
+.preSub{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	right: 4px;
+	top: 40px;
+	text-align: center;
+	background-color: red;
+	color:white;
+	border-radius: 20px;
+}
+.moveSub{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	right: 4px;
+	top: -20px;
+	text-align: center;
+	background-color: red;
+	color:white;
+	border-radius: 20px;
+	transition:all 1s;
 }

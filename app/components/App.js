@@ -2,6 +2,7 @@ import AddTodo from './AddTodo.js';
 import ShowList from './ShowList.js';
 import TodoList from './TodoList.js';
 import Avatar from './Avatar.js';
+import ChatPanel from './ChatPanel.js';
 import RecommendBlock from './RecommendBlock';
 import React,{ Component,PropsType } from 'react';
 import './App.css';
@@ -32,18 +33,22 @@ class App extends Component {
     	const data1 = this.props.otherUser;
     	const user = this.props.user;
     	return (
-            <div className="center">
-                <div className='child'>
-                    <RecommendBlock data={data1} follow={this.follow}/>
-                </div>
-                <div className='child'>
-                    <Avatar data={user}/>
-	                <p className="headline">TODOLIST</p>
-		    	    <AddTodo AddTodo={this.addTodo}/>
-		    	    <ShowList filter={this.filter}/>
-		    	    <TodoList data={data} toggleTodo={this.toggleTodo}/>
+    		<div className="center">
+	            <div className='left'>
+	                <div className='child'>
+	                    <RecommendBlock data={data1} follow={this.follow}/>
+	                </div>
+	                <div className='child'>
+	                    <Avatar data={user}/>
+		                <p className="headline">TODOLIST</p>
+			    	    <AddTodo AddTodo={this.addTodo}/>
+			    	    <ShowList filter={this.filter}/>
+			    	    <TodoList data={data} toggleTodo={this.toggleTodo}/>
+			    	</div>
 		    	</div>
-	    	</div>
+		    	<ChatPanel/>
+		    </div>
+
     	)
     }
 }

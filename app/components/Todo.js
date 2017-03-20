@@ -13,7 +13,7 @@ export default class Todo extends Component {
 		            style={{textDecoration:this.props.item.completed ? 'line-through' : 'none',
 		                    cursor:this.props.item.completed ? 'default' : 'pointer'}} 
 		            className="todoitem">
-		            `{this.props.item.id}.{this.props.item.text}`
+		            `{this.props.index}.{this.props.item.text}`
 		       </li>
 	}
 }

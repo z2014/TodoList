@@ -1,0 +1,73 @@
+.chatPanel{
+	vertical-align: top;
+	display: inline-block;
+	width: 25%;
+	line-height: 30px;
+	font-size: 20px;
+	height: 300px;
+	position: relative;
+	box-shadow: 1px 1px 20px #ccc;
+}
+.chat-header{
+	color: #00d8ff;
+	text-align: center;
+}
+#chatPanel{
+	overflow: auto;
+	height: 240px;
+}
+.leftchatItem{
+	list-style-type: none;
+	background-color: #3385ff;
+	margin: 5px 0;
+	width: 75%;
+	word-wrap: break-word;
+	border-radius: 20px;
+}
+.leftchatItem .chatUser{
+	display: block;
+	font-size: 16px;
+	color: #00d8ff;
+	line-height: 20px;
+}
+.rightchatItem{
+	list-style-type: none;
+	background-color: #3385ff;
+	margin: 5px 0;
+	width: 75%;
+	margin-left: 25%;
+	word-wrap: break-word;
+	border-radius: 20px;
+}
+.rightchatItem .chatUser{
+	margin-left: 75%;
+	display: block;
+	font-size: 16px;
+	color: #00d8ff;
+	line-height: 20px;
+}
+.chatContent{
+	display: block;
+    font-size: 16px;
+    padding: 5px;
+}
+.inputDiv{
+	display: inline-block;
+	width: 160px;
+	height: 30px;
+	font-size: 12px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+.send{
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: #108ee9;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+	bottom: 0px;
+	width: 40px;
+	height: 30px;
+	cursor: pointer;
+}

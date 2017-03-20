@@ -1,5 +1,5 @@
 .center{
-	width: 500px;
+	width: 800px;
 	margin: 100px auto;
 }
 .headline{
@@ -19,4 +19,8 @@
 	width: 60%;
 	display: inline-block;
 	box-sizing: border-box;
+}
+.left{
+	width: 75%;
+	display: inline-block;
 }

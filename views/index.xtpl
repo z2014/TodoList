@@ -9,7 +9,8 @@
     <script type="text/javascript">
         var socket = io('http://localhost:3000');
         var globalUser = {
-            id:{{currentUser.id}}
+            id:{{currentUser.id}},
+            user:'{{currentUser.user}}'
         };
     </script>
     <script src="/js/todo.js"></script>
