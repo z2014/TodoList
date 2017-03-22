@@ -13,10 +13,18 @@ export default class ChatPanel extends Component{
         const self = this;
         var { list } = this.state;
         socket.emit('speak',{user:globalUser.user,text:text});
-        socket.on('receive',function(data) {
+        
+	}
+	componentDidMount() {
+		var { list } = this.state;
+		socket.on('receive',function(data) {
+        	console.log('receive');
             list.push(data);
             self.setState({ list:list });
         });
+	}
+	componentDidUpdate() {
+		console.log('chat',this.state);
 	}
 	render() {
 		return (

@@ -4,7 +4,7 @@ export default class Avator extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user:this.props.data.user ? this.props.data.user : '2014',
+			user:this.props.data.name ? this.props.data.name : '2014',
 			followers:this.props.data.followers ? this.props.data.followers : 0,
 			following:this.props.data.following ? this.props.data.following : 0,
 			followersCount:0,
