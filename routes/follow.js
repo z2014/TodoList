@@ -6,7 +6,6 @@ var router = require('koa-router')(),
 router.post('/',function *() {
 	const param = qs.parse(this.request.body);
 	const currentUser = this.state.jwtdata;
-	console.log(param);
 	if (param.isFollowing) {
 		//取消关注
 		const _removal = yield Follow.destroy({

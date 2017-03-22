@@ -102,23 +102,21 @@
 	}).catch(function (err) {
 		console.log('todo', err);
 	});
-	// const initialState = { 
-	//     filter:'show-all',
-	//     todo:[{
-	//     	id:1,text:'learn react',completed:1
-	//     },{
-	//     	id:2,text:'learn vue',completed:0
-	//     }],
-	//     user:{user:'zcl',pwd:'123',followers:2,following:1},
-	//     otherUser:[{id:1,name:'擎天柱',follow:1},{id:2,name:'大黄蜂',follow:0},{id:3,name:'张春林',follow:0}]
-	// };
-	// // const initialState = data.data;
+	// // const initialState = { 
+	// //     filter:'show-all',
+	// //     todo:[{
+	// //     	id:1,text:'learn react',completed:1
+	// //     },{
+	// //     	id:2,text:'learn vue',completed:0
+	// //     }],
+	// //     user:{user:'zcl',pwd:'123',followers:2,following:1},
+	// //     otherUser:[{id:1,name:'擎天柱',follow:1},{id:2,name:'大黄蜂',follow:0},{id:3,name:'张春林',follow:0}]
+	// // };
+	// // // const initialState = data.data;
 	// var roots = document.getElementById('root');
-	// const store = configureStore(initialState);
+	// // const store = configureStore(initialState);
 	// ReactDOM.render(
-	//     <Provider store={store}>
-	//         <App/>
-	//     </Provider>,
+	//         <Login/>,
 	//     roots
 	// );
 
@@ -22465,7 +22463,7 @@
 			var _this = _possibleConstructorReturn(this, (Avator.__proto__ || Object.getPrototypeOf(Avator)).call(this, props));
 
 			_this.state = {
-				user: _this.props.data.user ? _this.props.data.user : '2014',
+				user: _this.props.data.name ? _this.props.data.name : '2014',
 				followers: _this.props.data.followers ? _this.props.data.followers : 0,
 				following: _this.props.data.following ? _this.props.data.following : 0,
 				followersCount: 0,
@@ -22639,10 +22637,22 @@
 				var list = this.state.list;
 
 				socket.emit('speak', { user: globalUser.user, text: text });
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var { list } = this.state;
+				const self = this;
 				socket.on('receive', function (data) {
+					console.log('receive');
 					list.push(data);
 					self.setState({ list: list });
 				});
+			}
+		}, {
+			key: 'componentDidUpdate',
+			value: function componentDidUpdate() {
+				console.log('chat', this.state);
 			}
 		}, {
 			key: 'render',
@@ -25948,7 +25958,8 @@
 			var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
 			_this.state = {
-				show: true
+				show: true,
+				index: 0
 			};
 			_this.toggle = _this.toggle.bind(_this);
 			return _this;
@@ -25958,7 +25969,8 @@
 			key: 'toggle',
 			value: function toggle(boolean) {
 				this.setState({
-					show: boolean
+					show: boolean,
+					index: !boolean
 				});
 			}
 		}, {
@@ -25966,6 +25978,14 @@
 			value: function render() {
 				var _this2 = this;
 
+				var index = this.state.index;
+				if (!index) {
+					var firstString = 'select-box chosen';
+					var secondString = 'select-box';
+				} else {
+					var firstString = 'select-box';
+					var secondString = 'select-box chosen';
+				}
 				return _react2.default.createElement(
 					'div',
 					{ className: 'login-box' },
@@ -25975,14 +25995,14 @@
 						{ className: 'toggle-box' },
 						_react2.default.createElement(
 							'span',
-							{ className: 'select-box chosen', onClick: function onClick() {
+							{ className: firstString, onClick: function onClick() {
 									return _this2.toggle(true);
 								} },
 							'\u767B\u9646'
 						),
 						_react2.default.createElement(
 							'span',
-							{ className: 'select-box', onClick: function onClick() {
+							{ className: secondString, onClick: function onClick() {
 									return _this2.toggle(false);
 								} },
 							'\u6CE8\u518C'

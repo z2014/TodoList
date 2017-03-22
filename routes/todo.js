@@ -5,18 +5,21 @@ var router = require('koa-router')(),
     qs = require('qs');
 router.get('/',function *() {
   const userid = this.state.jwtdata.id;
+  //查找用户信息
   const currentUser = yield User.findOne({
     where:{
       'id':userid
     },
-    attributes:['id','followers','following']
+    attributes:['id','name','followers','following']
   });
+  //查找该用户的todolist
   const _data = yield Todolist.findAll({
     where: {
       'userid':userid
     },
     order: [['id','DESC']]
   });
+  //查找该用户的关注
   const userData = yield Follow.findAll({
     where:{
       followers:userid
@@ -28,6 +31,8 @@ router.get('/',function *() {
     shiftArr.push(userData[i].dataValues.following);
   }
   shiftArr.push(userid);
+  console.log(shiftArr);
+  //查找未关注用户
   const _otherUser = yield User.findAll({
     where:{
       id:{

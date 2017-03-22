@@ -5,7 +5,6 @@ var router = require('koa-router')(),
     jwt = require('koa-jwt');
 router.post('/',function *() {
 	const param = qs.parse(this.request.body);
-  console.log(param);
 	const user = yield User.create({
 	  pwd:param.pwd,
 	  name:param.user,
@@ -25,7 +24,6 @@ router.post('/',function *() {
       expires: 3,
       domain: config.host
     };
-    console.log(_data);
   	this.body = {
   		success:true,
   		data:_data

@@ -3,7 +3,6 @@ var router = require('koa-router')(),
     Todolist = require('../models/todolist.js');
 router.get('/',function *(){
   const param = qs.parse(this.request.query);
-  console.log('user',param);
   const _data = yield Todolist.findAll({
   	where:{
   	  'userid':param.id,

@@ -14,9 +14,11 @@ process.env.TZ = 'Asia/Shanghai';
 
 var todo = require('./routes/todo'),
     index = require('./routes/index'),
-    loginapi = require('./routes/loginapi'),
+    signIn = require('./routes/signIn'),
+    signUp = require('./routes/signUp'),
     login = require('./routes/login'),
-    follow = require('./routes/follow');
+    follow = require('./routes/follow'),
+    getUser = require('./routes/getUser');
 
 var xtpl = require('xtpl/lib/koa');
 xtpl(app,{
@@ -55,13 +57,15 @@ app.use(function *(next) {
 });
 
 app.use(require('koa-static')(__dirname + '/public'));
-app.use(jwt({cookie: config.authCookie, secret: config.secret,key: 'jwtdata'}).unless({path: [/^\/login/,/^\/api\/login/] }));
+app.use(jwt({cookie: config.authCookie, secret: config.secret,key: 'jwtdata'}).unless({path: [/^\/login/,/^\/api\/signIn/,/^\/api\/signUp/] }));
 
 router.use('/index', index.routes());
 router.use('/login', login.routes());
-router.use('/api/login', loginapi.routes());
+router.use('/api/signIn', signIn.routes());
+router.use('/api/signUp', signUp.routes());
 router.use('/api/todo', todo.routes());
 router.use('/api/follow',follow.routes());
+router.use('/api/getUser',getUser.routes());
 
 app.use(router.routes()).use(router.allowedMethods());
 
@@ -69,7 +73,7 @@ app.use(router.routes()).use(router.allowedMethods());
 // 	logger.error('server error',err,ctx);
 // });
 
-// var server = require('http').createServer(app.callback());
+
 
 
 module.exports = app;

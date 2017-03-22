@@ -33,6 +33,7 @@ io.on('connection',function(socket) {
   socket.on('speak',function(data) {
     console.log('speak',data);
     io.sockets.emit('receive',data);
+    socket.emit('test',{'aaa':'test'});
   });
 });
 
