@@ -4,7 +4,7 @@
 	width: 25%;
 	line-height: 30px;
 	font-size: 20px;
-	height: 300px;
+	height: 310px;
 	position: relative;
 	box-shadow: 1px 1px 20px #ccc;
 }
@@ -18,46 +18,48 @@
 }
 .leftchatItem{
 	list-style-type: none;
-	background-color: #3385ff;
 	margin: 5px 0;
 	width: 75%;
 	word-wrap: break-word;
-	border-radius: 20px;
 }
 .leftchatItem .chatUser{
-	display: block;
+	display: inline-block;
 	font-size: 16px;
 	color: #00d8ff;
 	line-height: 20px;
+	margin-right: 10px;
 }
 .rightchatItem{
 	list-style-type: none;
-	background-color: #3385ff;
 	margin: 5px 0;
 	width: 75%;
 	margin-left: 25%;
 	word-wrap: break-word;
-	border-radius: 20px;
 }
-.rightchatItem .chatUser{
-	margin-left: 75%;
-	display: block;
+.rightchatItem .chatUser{	
+	display: inline-block;
 	font-size: 16px;
 	color: #00d8ff;
 	line-height: 20px;
+	margin-left: 5px;
 }
 .chatContent{
-	display: block;
+	width: 70%;
+	border-radius: 20px;
+	background-color: #3385ff;
+	display: inline-block;
     font-size: 16px;
     padding: 5px;
 }
 .inputDiv{
 	display: inline-block;
 	width: 160px;
-	height: 30px;
+	height: 40px;
+	overflow: auto;
 	font-size: 12px;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
+	line-height: 12px;
 }
 .send{
     display: inline-block;
@@ -68,6 +70,8 @@
     text-align: center;
 	bottom: 0px;
 	width: 40px;
-	height: 30px;
+	height: 40px;
 	cursor: pointer;
+	vertical-align: top;
+	line-height: 40px;
 }

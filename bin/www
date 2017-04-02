@@ -25,15 +25,15 @@ io.on('connection',function(socket) {
   socket.on('follow',function(data) {
     console.log('client',data);
     if (data.isFollowing) {
-      io.sockets.emit('reduceFans',data.id);
+      io.sockets.emit('reduceFans',data.id);     
     } else { 
       io.sockets.emit('addFans',data.id);
+      io.emit('addMan');
     }
   });
   socket.on('speak',function(data) {
     console.log('speak',data);
     io.sockets.emit('receive',data);
-    socket.emit('test',{'aaa':'test'});
   });
 });
 

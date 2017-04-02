@@ -13,18 +13,15 @@ export default class ChatPanel extends Component{
         const self = this;
         var { list } = this.state;
         socket.emit('speak',{user:globalUser.user,text:text});
-        
+        this.refs.content.innerHTML = '';
 	}
 	componentDidMount() {
 		var { list } = this.state;
+		const self = this;
 		socket.on('receive',function(data) {
-        	console.log('receive');
             list.push(data);
             self.setState({ list:list });
         });
-	}
-	componentDidUpdate() {
-		console.log('chat',this.state);
 	}
 	render() {
 		return (
@@ -34,8 +31,8 @@ export default class ChatPanel extends Component{
 			        {
 			        	this.state.list.map(function(item,index) {
 			            	if (item.user === globalUser.user) {
-			            		return <li className='rightchatItem' key={index}><i className='chatUser'>{item.user}</i>
-			                    <span className='chatContent'>{item.text}</span></li>;
+			            		return <li className='rightchatItem' key={index}><span className='chatContent'>{item.text}</span><i className='chatUser'>{item.user}</i>
+			                    </li>;
 			            	} else {
 			            		return <li className='leftchatItem' key={index}><i className='chatUser'>{item.user}</i>
 			                    <span className='chatContent'>{item.text}</span></li>;

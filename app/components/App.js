@@ -15,6 +15,7 @@ class App extends Component {
 		this.toggleTodo = this.toggleTodo.bind(this);
 		this.filter = this.filter.bind(this);
 		this.follow = this.follow.bind(this);
+		this.exit = this.exit.bind(this);
 	}
 	addTodo(text) {
 		this.props.addTodo(text);
@@ -27,6 +28,10 @@ class App extends Component {
 	}
 	follow(name,isFollowing) {
         this.props.follow(name,isFollowing);
+	}
+	exit() {
+		document.cookie = 'todo-online= ';
+		window.location.href = '/index';
 	}
     render() { 
     	const data = this.props.list;
@@ -44,6 +49,8 @@ class App extends Component {
 			    	    <AddTodo AddTodo={this.addTodo}/>
 			    	    <ShowList filter={this.filter}/>
 			    	    <TodoList data={data} toggleTodo={this.toggleTodo}/>
+			    	    <p onClick={this.exit} className="exit">注销用户</p>
+			    	    <a href="https://github.com/z2014/TodoList" target="blank" className="href">喜欢就点个star吧</a>
 			    	</div>
 		    	</div>
 		    	<ChatPanel/>

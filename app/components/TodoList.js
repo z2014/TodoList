@@ -6,7 +6,7 @@ export default class TodoList extends Component {
 	}
 	render() {
 		const data = this.props.data;
-		const style = {margin:0,padding:0};
+		const style = {margin:0,padding:0,height:'150px',overflow:'auto'};
 		return (
 			<ul style={style}>
     	        {

@@ -7,7 +7,6 @@ export default class RecommendBlock extends Component{
 		super(props);
 	}
 	render() {
-		console.log(this.props.data);
 		return (
 			<div>
 			    <p className='followhead'>热门大v</p>

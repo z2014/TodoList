@@ -20,7 +20,23 @@
 	display: inline-block;
 	box-sizing: border-box;
 }
+.href{
+	text-decoration: none;
+	color: black;
+	text-align: center;
+	display: block;
+}
+.href:hover{
+	text-decoration: underline;
+}
 .left{
 	width: 75%;
 	display: inline-block;
+}
+.exit{
+	text-align: center;
+	font-size:20px;
+}
+.exit:hover{
+	text-decoration:underline
 }

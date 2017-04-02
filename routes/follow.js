@@ -14,28 +14,21 @@ router.post('/',function *() {
 				following:param.id
 			}
 		});
-		const _removalCurUser = yield User.update({
-			'following':--currentUser.following
-		},{
-			'where':{
-				'id':currentUser.id
-		  }
-		});
-		const data = yield User.findOne({
-	  	where: {
-	  	  id:param.id
-	  	},
-	    attributes: ['id','followers','following']
-	  });
-		const _removalUser = yield User.update({
-			'followers':--data.followers
-		},{
-			'where':{
-				'id':param.id
+		var _user = yield User.findOne({
+			where: {
+				id:currentUser.id
 			}
 		});
+		_user.decrement('following');
+		var data = yield User.findOne({
+		  where: {
+		  	id:param.id
+		  },
+		  attributes: ['id','followers','following']
+		});
+		data.decrement('followers');
 		//创建和更新失败
-		if (_removal && (_removalCurUser.length === 1) && (_removalUser.length === 1)) {
+		if (_removal) {
 			this.body = {
 		    success:true
 			};
@@ -45,32 +38,25 @@ router.post('/',function *() {
 			};
 		}		
 	} else {
-    const _create = yield Follow.create({
-    	followers:currentUser.id,
-    	following:param.id
-    });
-    const _updateCurUser = yield User.update({
-			'following':++currentUser.following
-		},{
-			'where':{
-				'id':currentUser.id
-		  }
-		});
-		const data = yield User.findOne({
-	  	where: {
-	  	  id:param.id
-	  	},
-	    attributes: ['id','followers','following']
-	  });
-		const _updateUser = yield User.update({
-			'followers':++data.followers
-		},{
-			'where':{
-				'id':param.id
-			}
-		});
+        const _create = yield Follow.create({
+    	  followers:currentUser.id,
+    	  following:param.id
+        });
+        var _user = yield User.findOne({
+        	where:{
+        		id:currentUser.id
+        	}
+        });
+        _user.increment('following');
+	    const data = yield User.findOne({
+	  	  where: {
+	  	    id:param.id
+	  	  },
+	      attributes: ['id','followers','following']
+	    });
+	    data.increment('followers');
 		//创建和更新成功
-		if (_create && (_updateCurUser.length === 1) && (_updateUser.length === 1)) {
+		if (_create) {
 			this.body = {
 		    success:true
 			};

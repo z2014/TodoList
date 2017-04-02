@@ -24,6 +24,12 @@ export default class Avator extends Component {
 	            });
 	        }
 	    });
+	    socket.on('addMan',function(data) {
+	    	self.refs.followingSub.className = 'moveSub';
+			setTimeout(function () {
+				self.refs.followingSub.className = 'preSub';
+			}, 1000);
+	    });
 	    socket.on('reduceFans',function(data) {
 	        if (data === globalUser.id) {
 	            self.setState({

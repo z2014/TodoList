@@ -81,44 +81,46 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	fetch('/api/todo', {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		credentials: 'include',
-		mode: 'cors'
-	}).then(function (response) {
-		return response.json();
-	}).then(function (data) {
-		var initialState = data.data;
-		var roots = document.getElementById('root');
-		var store = (0, _configureStore2.default)(initialState);
-		_reactDom2.default.render(_react2.default.createElement(
-			_reactRedux.Provider,
-			{ store: store },
-			_react2.default.createElement(_App2.default, null)
-		), roots);
-	}).catch(function (err) {
-		console.log('todo', err);
-	});
-	// // const initialState = { 
-	// //     filter:'show-all',
-	// //     todo:[{
-	// //     	id:1,text:'learn react',completed:1
-	// //     },{
-	// //     	id:2,text:'learn vue',completed:0
-	// //     }],
-	// //     user:{user:'zcl',pwd:'123',followers:2,following:1},
-	// //     otherUser:[{id:1,name:'擎天柱',follow:1},{id:2,name:'大黄蜂',follow:0},{id:3,name:'张春林',follow:0}]
-	// // };
+	// fetch('/api/todo',{
+	// 	method: 'GET',
+	// 	headers: {
+	// 		'Content-Type': 'application/json'
+	// 	},
+	// 	credentials: 'include',
+	// 	mode: 'cors'
+	// }).then(function(response) {
+	// 	return response.json();
+	// }).then(function(data) {
+	//     const initialState = data.data;
+	//     var roots = document.getElementById('root');
+	//     const store = configureStore(initialState);
+	//     ReactDOM.render(
+	// 	    <Provider store={store}>
+	// 	        <App/>
+	// 	    </Provider>,
+	//         roots
+	//     );
+	// }).catch(function(err){
+	// 	console.log('todo',err);
+	// });
+	var initialState = {
+	    filter: 'show-all',
+	    todo: [{
+	        id: 1, text: 'learn react', completed: 1
+	    }, {
+	        id: 2, text: 'learn vue', completed: 0
+	    }],
+	    user: { user: 'zcl', pwd: '123', followers: 2, following: 1 },
+	    otherUser: [{ id: 1, name: '擎天柱', follow: 1 }, { id: 2, name: '大黄蜂', follow: 0 }, { id: 3, name: '张春林', follow: 0 }]
+	};
 	// // // const initialState = data.data;
-	// var roots = document.getElementById('root');
-	// // const store = configureStore(initialState);
-	// ReactDOM.render(
-	//         <Login/>,
-	//     roots
-	// );
+	var roots = document.getElementById('root');
+	var store = (0, _configureStore2.default)(initialState);
+	_reactDom2.default.render(_react2.default.createElement(
+	    _reactRedux.Provider,
+	    { store: store },
+	    _react2.default.createElement(_App2.default, null)
+	), roots);
 
 /***/ },
 /* 2 */
@@ -21620,6 +21622,7 @@
 			_this.toggleTodo = _this.toggleTodo.bind(_this);
 			_this.filter = _this.filter.bind(_this);
 			_this.follow = _this.follow.bind(_this);
+			_this.exit = _this.exit.bind(_this);
 			return _this;
 		}
 
@@ -21642,6 +21645,12 @@
 			key: 'follow',
 			value: function follow(name, isFollowing) {
 				this.props.follow(name, isFollowing);
+			}
+		}, {
+			key: 'exit',
+			value: function exit() {
+				document.cookie = 'todo-online= ';
+				window.location.href = '/index';
 			}
 		}, {
 			key: 'render',
@@ -21671,7 +21680,17 @@
 							),
 							_react2.default.createElement(_AddTodo2.default, { AddTodo: this.addTodo }),
 							_react2.default.createElement(_ShowList2.default, { filter: this.filter }),
-							_react2.default.createElement(_TodoList2.default, { data: data, toggleTodo: this.toggleTodo })
+							_react2.default.createElement(_TodoList2.default, { data: data, toggleTodo: this.toggleTodo }),
+							_react2.default.createElement(
+								'p',
+								{ onClick: this.exit, className: 'exit' },
+								'\u6CE8\u9500\u7528\u6237'
+							),
+							_react2.default.createElement(
+								'a',
+								{ href: 'https://github.com/z2014/TodoList', target: 'blank', className: 'href' },
+								'\u559C\u6B22\u5C31\u70B9\u4E2Astar\u5427'
+							)
 						)
 					),
 					_react2.default.createElement(_ChatPanel2.default, null)
@@ -22305,7 +22324,7 @@
 				var _this2 = this;
 
 				var data = this.props.data;
-				var style = { margin: 0, padding: 0 };
+				var style = { margin: 0, padding: 0, height: '150px', overflow: 'auto' };
 				return _react2.default.createElement(
 					'ul',
 					{ style: style },
@@ -22487,6 +22506,12 @@
 						});
 					}
 				});
+				socket.on('addMan', function (data) {
+					self.refs.followingSub.className = 'moveSub';
+					setTimeout(function () {
+						self.refs.followingSub.className = 'preSub';
+					}, 1000);
+				});
 				socket.on('reduceFans', function (data) {
 					if (data === globalUser.id) {
 						self.setState({
@@ -22637,22 +22662,18 @@
 				var list = this.state.list;
 
 				socket.emit('speak', { user: globalUser.user, text: text });
+				this.refs.content.innerHTML = '';
 			}
 		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				var { list } = this.state;
-				const self = this;
+				var list = this.state.list;
+
+				var self = this;
 				socket.on('receive', function (data) {
-					console.log('receive');
 					list.push(data);
 					self.setState({ list: list });
 				});
-			}
-		}, {
-			key: 'componentDidUpdate',
-			value: function componentDidUpdate() {
-				console.log('chat', this.state);
 			}
 		}, {
 			key: 'render',
@@ -22674,14 +22695,14 @@
 									'li',
 									{ className: 'rightchatItem', key: index },
 									_react2.default.createElement(
-										'i',
-										{ className: 'chatUser' },
-										item.user
-									),
-									_react2.default.createElement(
 										'span',
 										{ className: 'chatContent' },
 										item.text
+									),
+									_react2.default.createElement(
+										'i',
+										{ className: 'chatUser' },
+										item.user
 									)
 								);
 							} else {
@@ -22752,7 +22773,7 @@
 
 
 	// module
-	exports.push([module.id, ".chatPanel{\r\n\tvertical-align: top;\r\n\tdisplay: inline-block;\r\n\twidth: 25%;\r\n\tline-height: 30px;\r\n\tfont-size: 20px;\r\n\theight: 300px;\r\n\tposition: relative;\r\n\tbox-shadow: 1px 1px 20px #ccc;\r\n}\r\n.chat-header{\r\n\tcolor: #00d8ff;\r\n\ttext-align: center;\r\n}\r\n#chatPanel{\r\n\toverflow: auto;\r\n\theight: 240px;\r\n}\r\n.leftchatItem{\r\n\tlist-style-type: none;\r\n\tbackground-color: #3385ff;\r\n\tmargin: 5px 0;\r\n\twidth: 75%;\r\n\tword-wrap: break-word;\r\n\tborder-radius: 20px;\r\n}\r\n.leftchatItem .chatUser{\r\n\tdisplay: block;\r\n\tfont-size: 16px;\r\n\tcolor: #00d8ff;\r\n\tline-height: 20px;\r\n}\r\n.rightchatItem{\r\n\tlist-style-type: none;\r\n\tbackground-color: #3385ff;\r\n\tmargin: 5px 0;\r\n\twidth: 75%;\r\n\tmargin-left: 25%;\r\n\tword-wrap: break-word;\r\n\tborder-radius: 20px;\r\n}\r\n.rightchatItem .chatUser{\r\n\tmargin-left: 75%;\r\n\tdisplay: block;\r\n\tfont-size: 16px;\r\n\tcolor: #00d8ff;\r\n\tline-height: 20px;\r\n}\r\n.chatContent{\r\n\tdisplay: block;\r\n    font-size: 16px;\r\n    padding: 5px;\r\n}\r\n.inputDiv{\r\n\tdisplay: inline-block;\r\n\twidth: 160px;\r\n\theight: 30px;\r\n\tfont-size: 12px;\r\n\tborder: 1px solid #ccc;\r\n\tbox-sizing: border-box;\r\n}\r\n.send{\r\n    display: inline-block;\r\n    box-sizing: border-box;\r\n    background-color: #108ee9;\r\n    color: white;\r\n    font-size: 16px;\r\n    text-align: center;\r\n\tbottom: 0px;\r\n\twidth: 40px;\r\n\theight: 30px;\r\n\tcursor: pointer;\r\n}", ""]);
+	exports.push([module.id, ".chatPanel{\r\n\tvertical-align: top;\r\n\tdisplay: inline-block;\r\n\twidth: 25%;\r\n\tline-height: 30px;\r\n\tfont-size: 20px;\r\n\theight: 310px;\r\n\tposition: relative;\r\n\tbox-shadow: 1px 1px 20px #ccc;\r\n}\r\n.chat-header{\r\n\tcolor: #00d8ff;\r\n\ttext-align: center;\r\n}\r\n#chatPanel{\r\n\toverflow: auto;\r\n\theight: 240px;\r\n}\r\n.leftchatItem{\r\n\tlist-style-type: none;\r\n\tmargin: 5px 0;\r\n\twidth: 75%;\r\n\tword-wrap: break-word;\r\n}\r\n.leftchatItem .chatUser{\r\n\tdisplay: inline-block;\r\n\tfont-size: 16px;\r\n\tcolor: #00d8ff;\r\n\tline-height: 20px;\r\n\tmargin-right: 10px;\r\n}\r\n.rightchatItem{\r\n\tlist-style-type: none;\r\n\tmargin: 5px 0;\r\n\twidth: 75%;\r\n\tmargin-left: 25%;\r\n\tword-wrap: break-word;\r\n}\r\n.rightchatItem .chatUser{\t\r\n\tdisplay: inline-block;\r\n\tfont-size: 16px;\r\n\tcolor: #00d8ff;\r\n\tline-height: 20px;\r\n\tmargin-left: 5px;\r\n}\r\n.chatContent{\r\n\twidth: 70%;\r\n\tborder-radius: 20px;\r\n\tbackground-color: #3385ff;\r\n\tdisplay: inline-block;\r\n    font-size: 16px;\r\n    padding: 5px;\r\n}\r\n.inputDiv{\r\n\tdisplay: inline-block;\r\n\twidth: 160px;\r\n\theight: 40px;\r\n\toverflow: auto;\r\n\tfont-size: 12px;\r\n\tborder: 1px solid #ccc;\r\n\tbox-sizing: border-box;\r\n\tline-height: 12px;\r\n}\r\n.send{\r\n    display: inline-block;\r\n    box-sizing: border-box;\r\n    background-color: #108ee9;\r\n    color: white;\r\n    font-size: 16px;\r\n    text-align: center;\r\n\tbottom: 0px;\r\n\twidth: 40px;\r\n\theight: 40px;\r\n\tcursor: pointer;\r\n\tvertical-align: top;\r\n\tline-height: 40px;\r\n}", ""]);
 
 	// exports
 
@@ -22803,7 +22824,6 @@
 			value: function render() {
 				var _this2 = this;
 
-				console.log(this.props.data);
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -23563,7 +23583,7 @@
 
 
 	// module
-	exports.push([module.id, ".center{\r\n\twidth: 800px;\r\n\tmargin: 100px auto;\r\n}\r\n.headline{\r\n\tmargin: 0 0 10px 0;\r\n\tcolor: #00d8ff;\r\n\ttext-align: center;\r\n\tfont-size: 35px;\r\n}\r\n.child:first-child{\r\n\twidth: 40%;\r\n\theight: 20px;\r\n\tdisplay: inline-block;\r\n\tvertical-align: top;\r\n\tbox-sizing: border-box;\r\n}\r\n.child:last-child{\r\n\twidth: 60%;\r\n\tdisplay: inline-block;\r\n\tbox-sizing: border-box;\r\n}\r\n.left{\r\n\twidth: 75%;\r\n\tdisplay: inline-block;\r\n}", ""]);
+	exports.push([module.id, ".center{\r\n\twidth: 800px;\r\n\tmargin: 100px auto;\r\n}\r\n.headline{\r\n\tmargin: 0 0 10px 0;\r\n\tcolor: #00d8ff;\r\n\ttext-align: center;\r\n\tfont-size: 35px;\r\n}\r\n.child:first-child{\r\n\twidth: 40%;\r\n\theight: 20px;\r\n\tdisplay: inline-block;\r\n\tvertical-align: top;\r\n\tbox-sizing: border-box;\r\n}\r\n.child:last-child{\r\n\twidth: 60%;\r\n\tdisplay: inline-block;\r\n\tbox-sizing: border-box;\r\n}\r\n.href{\r\n\ttext-decoration: none;\r\n\tcolor: black;\r\n\ttext-align: center;\r\n\tdisplay: block;\r\n}\r\n.href:hover{\r\n\ttext-decoration: underline;\r\n}\r\n.left{\r\n\twidth: 75%;\r\n\tdisplay: inline-block;\r\n}\r\n.exit{\r\n\ttext-align: center;\r\n\tfont-size:20px;\r\n}\r\n.exit:hover{\r\n\ttext-decoration:underline\r\n}", ""]);
 
 	// exports
 
