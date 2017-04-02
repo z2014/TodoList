@@ -81,46 +81,46 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// fetch('/api/todo',{
-	// 	method: 'GET',
-	// 	headers: {
-	// 		'Content-Type': 'application/json'
-	// 	},
-	// 	credentials: 'include',
-	// 	mode: 'cors'
-	// }).then(function(response) {
-	// 	return response.json();
-	// }).then(function(data) {
-	//     const initialState = data.data;
-	//     var roots = document.getElementById('root');
-	//     const store = configureStore(initialState);
-	//     ReactDOM.render(
-	// 	    <Provider store={store}>
-	// 	        <App/>
-	// 	    </Provider>,
-	//         roots
-	//     );
-	// }).catch(function(err){
-	// 	console.log('todo',err);
-	// });
-	var initialState = {
-	    filter: 'show-all',
-	    todo: [{
-	        id: 1, text: 'learn react', completed: 1
-	    }, {
-	        id: 2, text: 'learn vue', completed: 0
-	    }],
-	    user: { user: 'zcl', pwd: '123', followers: 2, following: 1 },
-	    otherUser: [{ id: 1, name: '擎天柱', follow: 1 }, { id: 2, name: '大黄蜂', follow: 0 }, { id: 3, name: '张春林', follow: 0 }]
-	};
-	// // // const initialState = data.data;
-	var roots = document.getElementById('root');
-	var store = (0, _configureStore2.default)(initialState);
-	_reactDom2.default.render(_react2.default.createElement(
-	    _reactRedux.Provider,
-	    { store: store },
-	    _react2.default.createElement(_App2.default, null)
-	), roots);
+	fetch('/api/todo', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		credentials: 'include',
+		mode: 'cors'
+	}).then(function (response) {
+		return response.json();
+	}).then(function (data) {
+		var initialState = data.data;
+		var roots = document.getElementById('root');
+		var store = (0, _configureStore2.default)(initialState);
+		_reactDom2.default.render(_react2.default.createElement(
+			_reactRedux.Provider,
+			{ store: store },
+			_react2.default.createElement(_App2.default, null)
+		), roots);
+	}).catch(function (err) {
+		console.log('todo', err);
+	});
+	// const initialState = { 
+	//     filter:'show-all',
+	//     todo:[{
+	//     	id:1,text:'learn react',completed:1
+	//     },{
+	//     	id:2,text:'learn vue',completed:0
+	//     }],
+	//     user:{user:'zcl',pwd:'123',followers:2,following:1},
+	//     otherUser:[{id:1,name:'擎天柱',follow:1},{id:2,name:'大黄蜂',follow:0},{id:3,name:'张春林',follow:0}]
+	// };
+	// // // // const initialState = data.data;
+	// var roots = document.getElementById('root');
+	// const store = configureStore(initialState);
+	// ReactDOM.render(
+	//         <Provider store={store}>
+	//  	        <App/>
+	//  	    </Provider>,
+	//     roots
+	// );
 
 /***/ },
 /* 2 */
